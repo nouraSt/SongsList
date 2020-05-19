@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+
+    <androidx.cardview.widget.CardView
+        android:layout_gravity="center_horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/card"
+        app:cardBackgroundColor="@color/semiTransparentColor"
+        app:cardCornerRadius="50dp"
+        >
+
+
+
+
+        <LinearLayout
+            android:id="@+id/lilay"
+            android:background="@color/transparent"
+            android:layout_width="420dp"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/img"
+
+                android:layout_width="80dp"
+                android:layout_height="50dp"
+                android:src="@drawable/ic_music_note_black_24dp" />
+            <TextView
+                android:id="@+id/song"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="5dp"
+                android:text="Current song"
+                android:paddingVertical="0dp"
+                android:textColor="@color/white"
+                android:textSize="25dp"
+                android:textStyle="bold" />
+
+            <ImageView
+                android:id="@+id/playy"
+                android:layout_width="55dp"
+                android:layout_height="50dp"
+                android:layout_marginRight="6dp"
+                android:src="@drawable/ic_play_arrow_black_24dp" />
+
+            <ImageView
+                android:id="@+id/stop"
+                android:layout_width="54dp"
+                android:layout_height="50dp"
+                android:layout_marginLeft="5dp"
+                android:src="@drawable/ic_stop_black_24dp" />
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+</LinearLayout>

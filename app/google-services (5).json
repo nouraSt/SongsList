@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "353895060783",
+    "firebase_url": "https://lucifer-d662d.firebaseio.com",
+    "project_id": "lucifer-d662d",
+    "storage_bucket": "lucifer-d662d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:353895060783:android:886e55a34b247d86293dda",
+        "android_client_info": {
+          "package_name": "com.education.lucifer"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "353895060783-b3vnegdv1j72t6s214mt7rt2hij6gkh4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA3LvkHIuwuXYdf6y69ZYRAs7YIq-qAMiA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "353895060783-b3vnegdv1j72t6s214mt7rt2hij6gkh4.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
