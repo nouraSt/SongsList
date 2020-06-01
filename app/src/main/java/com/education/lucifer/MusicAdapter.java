@@ -1,6 +1,7 @@
 package com.education.lucifer;
 
 import android.content.Context;
+import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -9,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -16,17 +18,21 @@ import java.util.ArrayList;
 public class MusicAdapter extends BaseAdapter {
     private Context context;
     private int layout;
-    private ArrayList<Music> musicArrayList;
+    private static ArrayList<Music> musicArrayList;
     private LayoutInflater inflate;
     private Boolean flag=true;
-    private MediaPlayer mediaPlayer;
+    private static MediaPlayer mediaPlayer;
     private String LOG_TAG= "yes";
+    private ImageView img1,img2;
 
-    public MusicAdapter(Context context, int layout, ArrayList<Music> musicArrayList, LayoutInflater inflate ){
+    public MusicAdapter(Context context, int layout, ArrayList<Music> musicArrayList, LayoutInflater inflate ,MediaPlayer mediaPlayer){
         this.context=context;
         this.layout=layout;
         this.musicArrayList=musicArrayList;
         this.inflate=inflate;
+        if(mediaPlayer!=null){
+            mediaPlayer.stop();
+        }
     }
 
     @Override
@@ -53,7 +59,7 @@ public class MusicAdapter extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
 
-        convertView = inflate.inflate(R.layout.song_item, parent, false);
+        convertView = inflate.inflate(layout, parent, false);
         TextView textHead = (TextView) convertView.findViewById(R.id.song);
         final ImageView img1= (ImageView) convertView.findViewById(R.id.playy);
         final ImageView img2 = (ImageView) convertView.findViewById(R.id.stop);
@@ -70,37 +76,26 @@ public class MusicAdapter extends BaseAdapter {
         final Music music = musicArrayList.get(position);
         textHead.setText(music.getSongName());
 
+
         img1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final MediaPlayer mediaPlayer= new MediaPlayer();
+                if(flag){
+                        mediaPlayer = MediaPlayer.create(context, music.getSongs());
 
-                if (flag) {
-                    try {
-                        mediaPlayer.setDataSource(music.getSongs());
-                        mediaPlayer.prepare();
-                        mediaPlayer.start();
-                    } catch (IOException e) {
-                        Log.e(LOG_TAG, "prepare() failed");
-                    }
+                        flag = false;
 
-
-                      //  mediaPlayer.create(context,music.getSongs());
-
-                    // mediaPlayer.start();
-                    flag= false;
                 }
-                if(mediaPlayer!= null && mediaPlayer.isPlaying()){
+                if(mediaPlayer.isPlaying()) {
                     mediaPlayer.pause();
                     img1.setImageResource(R.drawable.ic_pause_black_24dp);
-
-                }else{
+                } else {
                     mediaPlayer.start();
                     img1.setImageResource(R.drawable.ic_play_arrow_black_24dp);
                 }
-                mediaPlayer.start();
             }
         });
+
         img2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

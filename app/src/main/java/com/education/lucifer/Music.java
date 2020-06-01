@@ -3,9 +3,9 @@ package com.education.lucifer;
 public class Music {
     private String songName;
     private String artist;
-    private String songs;
+    private int songs;
 
-    public Music(String songName, String artist, String songs){
+    public Music(String songName, String artist, int songs){
         this.songName = songName;
         this.artist = artist;
         this.songs = songs;
@@ -27,11 +27,11 @@ public class Music {
         this.artist = artist;
     }
 
-    public String getSongs() {
+    public int getSongs() {
         return songs;
     }
 
-    public void setSongs(String songs) {
+    public void setSongs(int songs) {
         this.songs = songs;
     }
 }

@@ -1,19 +1,36 @@
 package com.education.lucifer;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -21,9 +38,12 @@ public class MainActivity extends AppCompatActivity {
     private MusicAdapter my_adapter;
     private ListView listview_songs;
     private TextView txt;
-    private DatabaseReference ProductsRef;
     private ArrayList<String> tracks;
+    private DatabaseReference ProductsRef;
+    private MediaPlayer mediaPlayer;
 
+    //private FirebaseFirestore db = FirebaseFirestore.getInstance();
+    //private DocumentReference noteRef = db.document("links");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,27 +54,14 @@ public class MainActivity extends AppCompatActivity {
         mymusic = new ArrayList<Music>();
         tracks = new ArrayList<String>();
 
-        ProductsRef = FirebaseDatabase.getInstance().getReference().child("Tracks");
-        ProductsRef.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                if(dataSnapshot.exists()){
-                    if(dataSnapshot.child("links").exists()){
-                        for (DataSnapshot data : dataSnapshot.getChildren()) {
-                            tracks.add(String.valueOf(data.child("links").getValue())); //add result into array list
+        mymusic.add(new Music("Track2","x1",R.raw.track1));
+        mymusic.add(new Music("Track3","x2",R.raw.track2));
 
-                        }
-                    }
-                }
-            }
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
 
-            }
-        });
-         mymusic.add(new Music("Track1","artist1", tracks.get(0)));
-        MusicAdapter my_adapter = new MusicAdapter(this,R.layout.song_item,mymusic,getLayoutInflater());
+
+
+        MusicAdapter my_adapter = new MusicAdapter(this,R.layout.song_item,mymusic,getLayoutInflater(), mediaPlayer);
         listview_songs.setAdapter(my_adapter);
         //mymusic.add(new Music("Track2","lucifer",R.raw.track2));
         //mymusic.add(new Music("Track3","lucifer",R.raw.track3));

@@ -8,7 +8,7 @@
 
     <androidx.cardview.widget.CardView
         android:layout_gravity="center_horizontal"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/card"
         app:cardBackgroundColor="@color/semiTransparentColor"
@@ -21,7 +21,7 @@
         <LinearLayout
             android:id="@+id/lilay"
             android:background="@color/transparent"
-            android:layout_width="420dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
             <ImageView
